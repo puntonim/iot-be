@@ -1,0 +1,44 @@
+[project]
+name = "iot-be"
+description = "IoT Backend"
+version = "0.1.0"
+authors = [
+    {name = "puntonim",email = "puntonim@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "datetime-utils @ git+https://github.com/puntonim/utils-monorepo#subdirectory=datetime-utils",
+    "settings-utils @ git+https://github.com/puntonim/utils-monorepo#subdirectory=settings-utils",
+    "fastapi[standard] (>=0.115.12,<0.116.0)",
+    "gunicorn (>=23.0.0,<24.0.0)",
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+black = "25.1.0"  # Must be the same as in `.pre-commit-config.yaml`.
+isort = "6.0.1"  # Must be the same as in `.pre-commit-config.yaml`.
+
+[tool.poetry.group.test.dependencies]
+pytest = "^8.4.0"
+pytest-xdist = {extras = ["psutil"], version = "^3.7.0"}
+
+[tool.black]  # See: https://black.readthedocs.io/en/stable/pyproject_toml.html
+line-length = 88  # Default.
+# skip-string-normalization = true  # Only for old projects.
+target-version = ["py313"]
+include = '\.py?$'
+extend-exclude = '''  # It automatically excludes all files in .gitignore by default.
+/(
+    \.git
+  # Project-specific:
+  | docs
+)/
+'''
+
+[tool.isort]
+profile = "black"  # See: https://black.readthedocs.io/en/stable/guides/using_black_with_other_tools.html#profile
+skip_gitignore = true  # Skip all files in .gitignore.
