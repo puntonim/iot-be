@@ -6,3 +6,4 @@
   https://github.com/encode/uvicorn/issues/527
   https://github.com/benoitc/gunicorn/issues/2404
 
+- Monit: monitorare altri processi come in https://mmonit.com/monit/img/screenshots/1.png

@@ -104,10 +104,12 @@ class _prod_settings:
 
     GUNICORN_ACCESS_LOG_PATH = REPO_ROOT_DIR / "infra" / "logs" / "gunicorn-access.log"
     GUNICORN_ERROR_LOG_PATH = REPO_ROOT_DIR / "infra" / "logs" / "gunicorn-error.log"
-    # Mind the path of the PID file is also used in infra/iot-be.monit.
+    # Mind the path of the PID file is also used in infra/iot-be.monit and
+    #  infra/gunicorn-stop.sh.
     # Do not put it in /var/run as you would need root access, so running Gunicorn
-    #  as root which creates sole .pyc files as root (before launching workers as
-    #  nimiq). And those files can't be deleted by nimiq in the next deployment.
+    #  as root which would create .pyc files as root (before launching workers as
+    #  nimiq). And those files can't be deleted by nimiq in the next deployment (and we
+    # #  don't want to run deployments as root).
     GUNICORN_PID_FILE_PATH = REPO_ROOT_DIR / "infra" / "gunicorn.pid"
 
 

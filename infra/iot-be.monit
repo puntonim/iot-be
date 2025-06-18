@@ -18,16 +18,17 @@
 # To start and stop a service:
 # $ sudo monit start gunicorn-iot-be
 
-# Mind the path of the PID file is also used in conf/settings_module.py (used in infra/gunicorn-conf.py).
+# Mind the path of the PID file is also used in conf/settings_module.py
+#  (used in infra/gunicorn-conf.py) and infra/gunicorn-stop.sh.
 # Do not put it in /var/run as you would need root access, so running Gunicorn
 #  as root which would create .pyc files as root (before launching workers as
 #  nimiq). And those files can't be deleted by nimiq in the next deployment (and we
-#  don;t want to run deployments as root).
+#  don't want to run deployments as root).
 check process gunicorn-iot-be with pidfile /home/nimiq/workspace/iot-be/infra/gunicorn.pid
 
-start program = "/bin/su - nimiq -c 'IOT_BE_ENV=PROD /home/nimiq/workspace/iot-be/.venv/bin/gunicorn --config /home/nimiq/workspace/iot-be/infra/gunicorn-conf.py iot_be.main:app'"
+start program = "/bin/su - nimiq -c '/home/nimiq/workspace/iot-be/infra/gunicorn-start.sh'"
 
-stop program = "/bin/su - nimiq -c 'cat /home/nimiq/workspace/iot-be/infra/gunicorn.pid | xargs -I XXX kill -s SIGTERM XXX'"
+stop program = "/bin/su - nimiq -c '/home/nimiq/workspace/iot-be/infra/gunicorn-stop.sh'"
 
 if failed
     host 192.168.1.251 port 7777 protocol http

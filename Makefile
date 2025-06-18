@@ -95,7 +95,7 @@ _deploy-using-existing-venv:
 	@$(MAKE) _upload
 
 	@echo 
-	@echo "$$(tput smul)>> Unzipping deploy.zip and restarting uvicorn in 192.168.1.251 in /home/nimiq/workspace/iot-be...$$(tput sgr0)"
+	@echo "$$(tput smul)>> Unzipping deploy.zip and restarting gunicorn in 192.168.1.251 in /home/nimiq/workspace/iot-be...$$(tput sgr0)"
 	@ssh nimiq@192.168.1.251 ' \
 		source /home/nimiq/.profile && \
 		cd /home/nimiq/workspace/ && \
@@ -132,7 +132,7 @@ _deploy-using-existing-venv:
 		ls -d */ | grep -E "^iot-be-[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9:]{8}\+[0-9:]{5}/?$$" | sort -r | tail -n +11 | xargs -I XXX rm -rf XXX'
 	@echo
 
-	@$(MAKE) _restart_uvicorn
+	@$(MAKE) _restart_gunicorn
 
 	@echo
 	@echo "$$(tput bold)$$(tput setab 10)DONE!!$$(tput sgr0)"
@@ -146,7 +146,7 @@ _deploy-and-rebuild-venv:
 	@$(MAKE) _upload
 
 	@echo 
-	@echo "$$(tput smul)>> Unzipping deploy.zip and restarting uvicorn in 192.168.1.251 in /home/nimiq/workspace/iot-be...$$(tput sgr0)"
+	@echo "$$(tput smul)>> Unzipping deploy.zip and restarting gunicorn in 192.168.1.251 in /home/nimiq/workspace/iot-be...$$(tput sgr0)"
 	@ssh nimiq@192.168.1.251 ' \
 		source /home/nimiq/.profile && \
 		cd /home/nimiq/workspace/ && \
@@ -191,7 +191,7 @@ _deploy-and-rebuild-venv:
 		ls -d */ | grep -E "^iot-be-[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9:]{8}\+[0-9:]{5}/?$$" | sort -r | tail -n +11 | xargs -I XXX rm -rf XXX'
 	@echo
 
-	@$(MAKE) _restart_uvicorn
+	@$(MAKE) _restart_gunicorn
 
 	@echo
 	@echo "$$(tput bold)$$(tput setab 10)DONE!!$$(tput sgr0)"
@@ -226,11 +226,11 @@ _upload:
 	@rm -rf .deploy
 
 
-.PHONY : _restart_uvicorn
-_restart_uvicorn:
-	@echo "$$(tput smul)Restarting uvicorn in 192.168.1.251...$$(tput sgr0)"
+.PHONY : _restart_gunicorn
+_restart_gunicorn:
+	@echo "$$(tput smul)Restarting gunicorn in 192.168.1.251...$$(tput sgr0)"
 	@ssh nimiq@192.168.1.251 '\
 		source /home/nimiq/.profile && \
 		sudo monit restart gunicorn-iot-be'
-		@ # In order to run monit with no sudo I had to add this to visudo:
+		@ # In order to run monit with no sudo as nimiq and no password I added this to visudo:
 		@ #  nimiq ALL=NOPASSWD: /sbin/reboot,/sbin/poweroff,/usr/bin/monit

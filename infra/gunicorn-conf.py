@@ -8,24 +8,24 @@ With Monit
 Gunicorn should be run and monitored with Monit.
 The monit file is iot-be/infra/iot-be.monit and it is symlinked in /etc/monit.d.
 
-Manually start and monitor Gunicorn with Monit:
+Start and monitor Gunicorn with **Monit**:
  $ sudo monit start gunicorn-iot-be
-Manually stop and unmonitor Gunicorn with Monit:
+Stop and un-monitor Gunicorn with **Monit**:
  $ sudo monit stop gunicorn-iot-be
 
 Without Monit
 -------------
 Manually start Gunicorn, without Monit:
- $ cd ~/workspace/iot-be
- $ IOT_BE_ENV=PROD .venv/bin/gunicorn --config infra/gunicorn-conf.py iot_be.main:app
-But this will not write its PID to /home/nimiq/workspace/iot-be/infra/gunicorn.pid
- so Monit will think it is not started.
+ $ ~/workspace/iot-be/infra/gunicorn-start.sh
+Note: this will also write its PID to infra/gunicorn.pid so Monit will start monitoring it.
 
-To manually stop Gunicorn, without Monit:
- $ sudo rc-service monit stop
+Manually stop Gunicorn, without Monit:
+ $ sudo rc-service monit stop  # Stop Monit.
+ $ ~/workspace/iot-be/infra/gunicorn-stop.sh
+Alternative, after stopping Monit:
  $ pkill -f gunicorn
  $ rm -rf /home/nimiq/workspace/iot-be/infra/gunicorn.pid
-Then you should restart Monit and it will take care of starting Gunicorn:
+Later, you should restart Monit and it will take care of starting Gunicorn again:
  $ sudo rc-service monit start
 """
 
