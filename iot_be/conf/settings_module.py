@@ -41,6 +41,9 @@ class settings:
 
     GUNICORN_WORKERS = 2
 
+    # TODO it's temporary until we implement an actual DB.
+    CSV_DB_PATH = REPO_ROOT_DIR / "db.csv"
+
     ## TODO delete me?
     # It's the log config for Uvicorn but then I switched to Gunicorn + Uvicorn workers.
     # Src:

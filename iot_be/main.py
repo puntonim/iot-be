@@ -17,6 +17,8 @@ from contextlib import asynccontextmanager
 import datetime_utils
 from fastapi import FastAPI
 
+from .temp import temp_router
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -39,6 +41,7 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(lifespan=lifespan)
+app.include_router(temp_router.router)
 
 
 @app.get("/iot/health")

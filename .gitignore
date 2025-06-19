@@ -465,3 +465,4 @@ node_modules/
 !Makefile
 .deploy/
 *.pid
+db.csv

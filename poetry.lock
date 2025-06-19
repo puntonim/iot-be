@@ -768,6 +768,26 @@ files = [
 typing-extensions = ">=4.6.0,<4.7.0 || >4.7.0"
 
 [[package]]
+name = "pydantic-utils"
+version = "1.0.0"
+description = "Pydantic Utils"
+optional = false
+python-versions = ">=3.10"
+groups = ["main"]
+files = []
+develop = false
+
+[package.dependencies]
+pydantic = ">=2.11.7,<3.0.0"
+
+[package.source]
+type = "git"
+url = "https://github.com/puntonim/utils-monorepo"
+reference = "HEAD"
+resolved_reference = "21e809676203f85d8349cdbc031d10b3605af5c8"
+subdirectory = "pydantic-utils"
+
+[[package]]
 name = "pygments"
 version = "2.19.1"
 description = "Pygments is a syntax highlighting package written in Python."
@@ -1336,4 +1356,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.13"
-content-hash = "6fe32430022a41a2ae846224e276e5fccc649bf01dfb3e96ff667c35d4ad0723"
+content-hash = "373f492df1c673084eb262ca10418dc2c69537d3b4910c41e8775ac5a84f44e9"

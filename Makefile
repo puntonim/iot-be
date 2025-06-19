@@ -114,6 +114,7 @@ _deploy-using-existing-venv:
 		cp -R .venv /home/nimiq/workspace/$${NEW_DIR_NAME} && \
 		cp -R infra/logs /home/nimiq/workspace/$${NEW_DIR_NAME}/infra && \
 		cp -R infra/*.pid /home/nimiq/workspace/$${NEW_DIR_NAME}/infra && \
+		cp -R db.csv /home/nimiq/workspace/$${NEW_DIR_NAME} && \
 		\
 		echo Moving all deployment files from .deploy to /home/nimiq/workspace/$${NEW_DIR_NAME}... && \
 		cd /home/nimiq/workspace/.deploy/iot-be && \
@@ -164,6 +165,7 @@ _deploy-and-rebuild-venv:
 		cd /home/nimiq/workspace/iot-be && \
 		cp -R infra/logs /home/nimiq/workspace/$${NEW_DIR_NAME}/infra && \
 		cp -R infra/*.pid /home/nimiq/workspace/$${NEW_DIR_NAME}/infra && \
+		cp -R db.csv /home/nimiq/workspace/$${NEW_DIR_NAME} && \
 		\
 		echo Moving all deployment files from .deploy to /home/nimiq/workspace/$${NEW_DIR_NAME}... && \
 		cd /home/nimiq/workspace/.deploy/iot-be && \
