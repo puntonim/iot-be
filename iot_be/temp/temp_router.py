@@ -34,8 +34,8 @@ class CreateTempInputSchema(pydantic_utils.BasePydanticSchema):
 # TODO add a query string like:
 #  room-id=BEDROOM_PAOLO&extra-cols=sensor-id,ip&date_after=2025-05-13T21:01:33.752427+02:00
 @router.get("/temps/")
-async def read_temps_endpoint() -> list[TempOutputSchema]:
-    temps: list[models.TempDbModel] = domain.TempDomain().get_temps()
+async def read_temps_endpoint(n: int = 1000) -> list[TempOutputSchema]:
+    temps: list[models.TempDbModel] = domain.TempDomain().get_temps(n)
 
     return [TempOutputSchema.model_validate(t) for t in temps]
 

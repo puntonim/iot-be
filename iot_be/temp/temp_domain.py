@@ -3,9 +3,10 @@ from . import temp_models as models
 
 class TempDomain:
     @classmethod
-    def get_temps(cls) -> list[models.TempDbModel]:
+    def get_temps(cls, n: int) -> list[models.TempDbModel]:
         temps: list[models.TempDbModel] = list(models.TempDbModel.read_from_disk())
-        return temps
+        temps.reverse()
+        return temps[:n]
 
     @classmethod
     def create_temp(
