@@ -12,8 +12,8 @@ from ..conf import settings
 
 
 class TempDbModel(pydantic_utils.BasePydanticSchema):
-    temp: int
-    humidity: int
+    temp: float
+    humidity: float
     date: Annotated[datetime, Field(default_factory=datetime_utils.now)]
     room_id: str
     sensor_id: str

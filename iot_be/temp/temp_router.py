@@ -16,8 +16,8 @@ class TempOutputSchema(pydantic_utils.BasePydanticSchema):
     #  same attr names (fi. an ORM DB model).
     model_config = pydantic.ConfigDict(from_attributes=True)
     #
-    temp: int
-    humidity: int
+    temp: float
+    humidity: float
     date: datetime
     room_id: str
     sensor_id: str
@@ -25,8 +25,8 @@ class TempOutputSchema(pydantic_utils.BasePydanticSchema):
 
 
 class CreateTempInputSchema(pydantic_utils.BasePydanticSchema):
-    temp: int
-    humidity: int
+    temp: float
+    humidity: float
     room_id: str
     sensor_id: str
 

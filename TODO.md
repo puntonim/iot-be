@@ -1,3 +1,5 @@
+- rename temps to (room) climate
+
 - Make it a monorepo with the code for arduino
 
 - Store data in SQLite with PeeWee

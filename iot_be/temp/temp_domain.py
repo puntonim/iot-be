@@ -9,7 +9,7 @@ class TempDomain:
 
     @classmethod
     def create_temp(
-        cls, temp: int, humidity: int, room_id: str, sensor_id: str, sensor_ip: str
+        cls, temp: float, humidity: float, room_id: str, sensor_id: str, sensor_ip: str
     ) -> models.TempDbModel:
         temp = models.TempDbModel(
             temp=temp,
